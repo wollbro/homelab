@@ -2,40 +2,30 @@
 
 I try to setup my network infrastructure as what an business would setup so
 that I can learn the more advanced functionality that comes with professional
-equitment, this is an ongoing process and I will keep updating it when my
+equipment, this is an ongoing process and I will keep updating it when my
 budget allows.
 
-#### Current situation
+## Current situation
 
-The current situation looks like the image below where I have an old mesh
-network built on two Asus ZenWIFI XT8 Mesh nodes that is currently handling all
-my devices mostly wireless.
+Here I have an diagram showing my current network infrastructure, I am running
+a Ubiquti DreamMachine Pro that is connected to my fiber box that then 
+downlink to my US-48-500W switch using an SFP cabel with a speed of 10GbE.
 
-The exception is in my server room where I have run a Cat6 cable from one of
-the XT8 nodes and then distribute it to all my homelab equitment, this has
-worked fine for a couple of years but now I have multiple plans on expanding
-the homelab during 2025 so I want also to make sure my network infrastructure
-will not be a bottleneck.
+From my US-48-500W switch I downlink to 3 UniFi U7 Pro Max that is spread out
+through out the house to get the best coverage possible.
+It is also other devices through out the house that is connected using Cat6 
+cable that requires better stability.
 
-![Image of the current network infrastructure](https://github.com/digidaniel-dev/homelab/blob/update-readme/assets/network-2025.png?raw=true)
+![Image of the network infrastructure](https://github.com/digidaniel-dev/homelab/blob/main/assets/network-2025.webp?raw=true)
 
-#### Current goal
+## IaC
 
-Here we can see what the current goal is, I have more plans for the future but
-this is step 1.
+I am currently in process trying to migrate my configuration to code but due
+to the limited support in the Unifi API there is not much I can manage using
+Terraform or Ansible at the time being, but I will keep an eye open for added
+support and then update when more support is added.
 
-Here we can see that we have replaced the Asus ZenWIFI XT8 mesh nodes with an
-Ubiquiti Dream Machine Pro, that one is currently purchase and on it's way to
-my place and should be here in the couple of days.
+## Future Plans
 
-Then it has been added three UniFi U6 Pro AP's that will handle all the 
-wireless devices in my house and also in my server room, in the beginning I will
-use the Asus ZenWIFI XT8 nodes as AP's until I bought the Unifi AP's.
-
-Due to the move to the Dream Machine we are now having most of the equitment in
-the server room I also need to run two additional ethernet cables between the
-house and the server room, in this process I will replace the current one with
-an Cat6a and also for the two new once, this will be done in such a maner that
-I can easly replace the cables to Cat7 or 8 when the time is right.
-
-![Image of the planed network infrastructure](https://github.com/digidaniel-dev/homelab/blob/update-readme/assets/network-2025-plans.png?raw=true)
+* Add a 2.5G switch so I can utilize the full speed of my U7 Pro Max AP's.
+* Run a fiber cable to my office
