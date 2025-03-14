@@ -16,7 +16,7 @@ through out the house to get the best coverage possible.
 It is also other devices through out the house that is connected using Cat6 
 cable that requires better stability.
 
-![Image of the network infrastructure](https://github.com/digidaniel-dev/homelab/blob/update-readme/assets/network-2025.webp?raw=true)
+![Image of the network infrastructure](https://github.com/digidaniel-dev/homelab/blob/main/assets/network-2025.webp?raw=true)
 
 ## IaC
 
