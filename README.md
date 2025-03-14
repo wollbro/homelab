@@ -16,16 +16,16 @@ I am a strong advocate for GitOps and using automations as much as possible,
 to be clear, not everything should be automated but everything that can remove
 waste (waste as an wasted time) should be automated as long as it is secure.
 
-This repository is my Homelab in code, this repo is an repetentation on what I am
-running in my Homelab and how my Homelab is currently configured. This is both for
-my own documentation but also to help and inspire others that want to do the
-same.
+This repository is my Homelab in code, this repo is an repetentation on what I
+am running in my Homelab and how my Homelab is currently configured. This is
+both for my own documentation but also to help and inspire others that want to
+do the same.
 
 > [!IMPORTANT]
-> Things will change and I am always trying out new things, so I have another repo
-> called homelab-archive where I move everything that I am no longer using but have
-> been running, so if there is something that you have seen here but doesn't exists
-> anymore then check in that repo, it should be there.
+> Things will change and I am always trying out new things, so I have another
+> repo called homelab-archive where I move everything that I am no longer using
+> but have been running, so if there is something that you have seen here but
+> doesn't exists anymore then check in that repo, it should be there.
 
 ## Background
 
@@ -45,8 +45,8 @@ quick way out sometime)
 
 ## My Homelab
 
-My Homelab is running Proxmox VE, I have run Proxmox pretty much since I decided to
-setup my Homelab and I love it!
+My Homelab is running Proxmox VE, I have run Proxmox pretty much since I
+decided to setup my Homelab and I love it!
 
 > [!NOTE]
 > I hope to be able to setup more servers with Proxmox so I can experiment with
@@ -82,8 +82,8 @@ that Proxmox has to offer.
 
 ### Folder structure
 
-I have built the structure in a way so I can easily find what I am searching for
-so first level is the project or application I am interested in, the second 
+I have built the structure in a way so I can easily find what I am searching
+for so first level is the project or application I am interested in, the second 
 level is the tools I have been using to setup the project/application for
 instance Terraform, Ansible or maybe Docker compose file.
 
@@ -134,14 +134,14 @@ tutorial, and man I can say it has been an experiance.
 
 ### Some projects/applications looks out of date
 
-Yes as times go I will try different applications and projects and might replace
-stuff I have run before for something else that I liked, but as this is
+Yes as times go I will try different applications and projects and might
+replace stuff I have run before for something else that I liked, but as this is
 documentation and history for me there will exists things that is outdated so
 I can go back and check how I did something if I ever want to set it up again.
 
 ## Contribute
 
-Even if this is my own Homelab and I won't accept contribution dont heasitate to
-create a PR if there is something I could have done differently or if there is
-something that looks really wrong, I am still learning and all help is
+Even if this is my own Homelab and I won't accept contribution dont heasitate
+to create a PR if there is something I could have done differently or if there
+is something that looks really wrong, I am still learning and all help is
 appreciated.
