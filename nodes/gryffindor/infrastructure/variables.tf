@@ -1,3 +1,17 @@
+// All providers
+
+variable "endpoint" {
+  type = string
+}
+
+// SSH provider
+
+// TODO: Is this one required?
+variable "password" {
+  type      = string
+  sensitive = true
+}
+
 variable "ssh_user" {
   type = string
 }
@@ -7,23 +21,20 @@ variable "ssh_password" {
   sensitive = true
 }
 
-variable "endpoint" {
-  type = string
-}
+// API Provider
 
 variable "api_token" {
   type      = string
   sensitive = true
 }
 
+// Proxmox ACME Account
+
 variable "email" {
   type = string
 }
 
-variable "password" {
-  type      = string
-  sensitive = true
-}
+// Proxmox ACME Plugin
 
 variable "cloudflare_account_id" {
   type      = string
@@ -31,6 +42,17 @@ variable "cloudflare_account_id" {
 }
 
 variable "cloudflare_api_token" {
+  type      = string
+  sensitive = true
+}
+
+// Docker VM
+
+variable "docker_login_user" {
+  type = string
+}
+
+variable "docker_login_pass" {
   type      = string
   sensitive = true
 }
