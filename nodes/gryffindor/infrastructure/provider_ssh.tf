@@ -1,6 +1,8 @@
 provider "proxmox" {
+  alias = "ssh"
   endpoint  = var.endpoint
-  api_token = var.api_token
+  username  = "root@pam"
+  password  = var.password
   insecure  = true
 
   ssh {

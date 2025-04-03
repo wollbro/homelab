@@ -1,4 +1,5 @@
 resource "proxmox_virtual_environment_acme_dns_plugin" "cloudflare_dns_plugin" {
+  provider  = proxmox.ssh
   plugin = "cloudflare"
   api    = "cf"
   data = {
