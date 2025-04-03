@@ -1,4 +1,6 @@
 resource "proxmox_virtual_environment_download_file" "latest_truenas_iso" {
+  provider           = proxmox.api
+
   content_type       = "iso"
   datastore_id       = "local"
   node_name          = "gryffindor"

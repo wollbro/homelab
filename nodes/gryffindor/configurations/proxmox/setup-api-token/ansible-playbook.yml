@@ -6,7 +6,6 @@
     - name: Remove Terraform user
       ansible.builtin.shell: pveum user delete terraform@pve
       ignore_errors: true
-      when: force == "true"
 
     - name: Setup Terraform user
       ansible.builtin.shell: pveum user add terraform@pve
@@ -14,7 +13,6 @@
     - name: Remove Terraform role
       ansible.builtin.shell: pveum role delete Terraform
       ignore_errors: true
-      when: force == "true"
 
     - name: Setup Terraform role
       ansible.builtin.shell: |

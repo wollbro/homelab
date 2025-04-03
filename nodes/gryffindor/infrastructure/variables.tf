@@ -1,12 +1,3 @@
-variable "email" {
-  type = string
-}
-
-variable "password" {
-  type      = string
-  sensitive = true
-}
-
 variable "ssh_user" {
   type = string
 }
@@ -18,6 +9,20 @@ variable "ssh_password" {
 
 variable "endpoint" {
   type = string
+}
+
+variable "api_token" {
+  type      = string
+  sensitive = true
+}
+
+variable "email" {
+  type = string
+}
+
+variable "password" {
+  type      = string
+  sensitive = true
 }
 
 variable "cloudflare_account_id" {

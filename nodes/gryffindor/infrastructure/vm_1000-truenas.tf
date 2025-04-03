@@ -3,6 +3,8 @@ locals {
 }
 
 resource "proxmox_virtual_environment_vm" "truenas_vm" {
+  provider    = proxmox.api
+
   name        = "truenas"
   description = "Managed by Terraform"
   tags        = ["terraform", "truenas"]
@@ -94,6 +96,12 @@ resource "proxmox_virtual_environment_vm" "truenas_vm" {
     device  = "hostpci2"
     mapping = "NIC2"
     pcie    = true
+  }
+
+  lifecycle {
+    ignore_changes = [
+      initialization[0].datastore_id
+    ]
   }
 }
 
