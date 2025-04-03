@@ -95,5 +95,11 @@ resource "proxmox_virtual_environment_vm" "truenas_vm" {
     mapping = "NIC2"
     pcie    = true
   }
+
+  lifecycle {
+    ignore_changes = [
+      initialization[0].datastore_id
+    ]
+  }
 }
 
