@@ -1,7 +1,7 @@
 resource "proxmox_virtual_environment_vm" "vm_1010_docker" {
-  provider  = proxmox.api
+  provider = proxmox.api
 
-  name      = "docker"
+  name        = "docker"
   description = "Managed by Terraform"
   tags        = ["terraform", "debian"]
 
@@ -10,12 +10,12 @@ resource "proxmox_virtual_environment_vm" "vm_1010_docker" {
 
   keyboard_layout = "sv"
 
-  bios       = "ovmf"
-  machine    = "q35"
-  on_boot    = true
+  bios    = "ovmf"
+  machine = "q35"
+  on_boot = true
 
   agent {
-    enabled = true
+    enabled = false
   }
 
   stop_on_destroy = true
@@ -33,7 +33,7 @@ resource "proxmox_virtual_environment_vm" "vm_1010_docker" {
 
   disk {
     datastore_id = local.datastore_id
-    file_id      = proxmox_virtual_environment_download_file.debian_cloud_image.id
+    file_id      = module.debian_cloud_image.id
     interface    = "virtio0"
     iothread     = true
     discard      = "on"
