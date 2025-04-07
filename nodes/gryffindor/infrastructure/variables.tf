@@ -6,7 +6,6 @@ variable "endpoint" {
 
 // SSH provider
 
-// TODO: Is this one required?
 variable "password" {
   type      = string
   sensitive = true
