@@ -1,0 +1,29 @@
+- name: Remove Terraform user
+  ansible.builtin.shell: pveum user delete {{ terraform_user }}@{{ realm }}
+  ignore_errors: true
+
+- name: Setup Terraform user
+  ansible.builtin.shell: pveum user add {{ terraform_user }}@{{ realm }}
+
+- name: Remove Terraform role
+  ansible.builtin.shell: pveum role delete {{ terraform_role }}
+  ignore_errors: true
+
+- name: Setup Terraform role
+  ansible.builtin.shell: |
+    pveum role add {{ terraform_role }} -privs "{{ permissions }}"
+
+- name: Assign role to user
+  ansible.builtin.shell: |
+    pveum aclmod / \
+      -user {{ terraform_user }}@{{ realm }} \
+      -role {{ terraform_role }}
+
+- name: Setup api token
+  ansible.builtin.shell: |
+    pveum user token add {{ terraform_user }}@{{ realm }} provider --privsep=0 
+  register: api_token
+
+- name: Output api token
+  debug:
+    var: api_token.stdout_lines
