@@ -1,0 +1,29 @@
+name: 'Terraform CI'
+on:
+  pull_request:
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./nodes/gryffindor/infrastructure
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: setup terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: terraform init
+        run: terraform init
+
+      - name: terraform check format
+        run: terraform fmt -check
+
+      - name: terraform validate
+        run: terraform validate
