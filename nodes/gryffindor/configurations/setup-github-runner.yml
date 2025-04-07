@@ -1,0 +1,5 @@
+
+- name: Setup github runners
+  hosts: github-runner-vms
+  roles:
+    - github-runner_install
