@@ -5,7 +5,7 @@ resource "proxmox_virtual_environment_vm" "truenas_vm" {
   description = "Managed by Terraform"
   tags        = ["terraform", "truenas"]
 
-  node_name = local.default_node
+  node_name = module.main-node.name
   vm_id     = 1000
 
   keyboard_layout = "sv"
