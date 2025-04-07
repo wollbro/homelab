@@ -46,13 +46,22 @@ variable "cloudflare_api_token" {
   sensitive = true
 }
 
+// Generic VM
+
+variable "ssh_key_path" {
+  type = string
+}
+
 // Docker VM
 
 variable "docker_login_user" {
   type = string
 }
 
-variable "docker_login_pass" {
-  type      = string
-  sensitive = true
+variable "docker_ip" {
+  type = string
+}
+
+variable "docker_gateway" {
+  type = string
 }
