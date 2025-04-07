@@ -32,4 +32,5 @@ module "vm_1010_docker" {
   # Networking
   ipaddress = var.docker_ip
   gateway   = var.docker_gateway
+  dns_servers = var.dns_servers
 }

@@ -50,6 +50,11 @@ resource "proxmox_virtual_environment_vm" "cloud_init_vm" {
     datastore_id = var.datastore_id
     user_data_file_id = proxmox_virtual_environment_file.user_cloud_config.id
 
+    dns {
+      domain = "home.wollbro.se"
+      servers = var.dns_servers
+    }
+
     ip_config {
       ipv4 {
         address = var.ipaddress

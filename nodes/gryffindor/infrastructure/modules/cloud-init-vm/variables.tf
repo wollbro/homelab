@@ -81,6 +81,13 @@ variable "gateway" {
   sensitive = true
 }
 
+variable "dns_servers" {
+  type = list(string)
+  description = "Adds a list of DNS servers to the VM"
+  default = [ ]
+  sensitive = true
+}
+
 # Distro image variable
 
 variable "url" {

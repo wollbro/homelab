@@ -52,6 +52,11 @@ variable "ssh_key_path" {
   type = string
 }
 
+variable "dns_servers" {
+  type = list(string)
+  sensitive = true
+}
+
 // Docker VM
 
 variable "docker_login_user" {
