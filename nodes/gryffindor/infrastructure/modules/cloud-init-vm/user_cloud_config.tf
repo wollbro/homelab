@@ -28,6 +28,6 @@ resource "proxmox_virtual_environment_file" "user_cloud_config" {
       - echo "done" > /tmp/cloud-config.done
     EOF
 
-    file_name = "docker-data-cloud-config.yaml"
+    file_name = "${var.name}-user-cloud-config.yaml"
   }
 }

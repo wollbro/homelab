@@ -7,5 +7,6 @@ pkgs.mkShell {
     ansible
     packer
     nodejs
+    sshpass
   ];
 }

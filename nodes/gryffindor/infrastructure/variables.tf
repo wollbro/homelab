@@ -69,3 +69,17 @@ variable "docker_ip" {
 variable "docker_gateway" {
   type = string
 }
+
+// Github runner VM
+
+variable "github_runner_login_user" {
+  type = string
+}
+
+variable "github_runner_ip" {
+  type = string
+}
+
+variable "github_runner_gateway" {
+  type = string
+}
