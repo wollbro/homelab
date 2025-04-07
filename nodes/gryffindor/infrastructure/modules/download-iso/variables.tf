@@ -1,3 +1,7 @@
+variable "node" {
+  type = string
+}
+
 variable "url" {
   type        = string
   description = "Defines the url where to fetch image file from"
