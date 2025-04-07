@@ -14,14 +14,14 @@ terraform {
   }
 
   backend "s3" {
-    bucket = ""
+    bucket = "homelab"
 
     endpoints = {}
 
     access_key = ""
     secret_key = ""
 
-    key                         = ""
+    key                         = "terraform/terraform.tfstate"
     region                      = ""
     skip_requesting_account_id  = true
     skip_credentials_validation = true
