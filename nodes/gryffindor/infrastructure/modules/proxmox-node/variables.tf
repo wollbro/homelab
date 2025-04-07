@@ -21,3 +21,15 @@ variable "cloudflare_account_id" {
 variable "cloudflare_api_token" {
   type = string
 }
+
+variable "pci_devices" {
+  description = "List of PCI devices to map"
+  type = map(object({
+    id               = string
+    iommu_group      = number
+    path             = string
+    subsystem_id     = string
+    mediated_devices = bool
+  }))
+  default = {}
+}
