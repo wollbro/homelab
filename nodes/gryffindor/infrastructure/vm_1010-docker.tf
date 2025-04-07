@@ -9,18 +9,18 @@ module "vm_1010_docker" {
   }
 
   # VM configuration
-  name = "docker"
+  name  = "docker"
   vm_id = 1010
-  node = "gryffindor"
-  tags = [ "debian", "docker" ]
+  node  = "gryffindor"
+  tags  = ["debian", "docker"]
 
   # Credentials
-  user = var.docker_login_user
+  user     = var.docker_login_user
   ssh_keys = data.local_file.ssh_public_key.content
 
   # Resources
   cpu_cores = 4
-  memory = 4096
+  memory    = 4096
   disk_size = 50
 
   # Distro image configuration
@@ -31,5 +31,5 @@ module "vm_1010_docker" {
 
   # Networking
   ipaddress = var.docker_ip
-  gateway = var.docker_gateway
+  gateway   = var.docker_gateway
 }
