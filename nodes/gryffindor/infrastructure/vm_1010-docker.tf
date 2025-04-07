@@ -11,7 +11,7 @@ module "vm_1010_docker" {
   # VM configuration
   name  = "docker"
   vm_id = 1010
-  node  = "gryffindor"
+  node  = local.default_node
   tags  = ["debian", "docker"]
 
   # Credentials
@@ -30,7 +30,7 @@ module "vm_1010_docker" {
   checksum_algorithm = "sha512"
 
   # Networking
-  ipaddress = var.docker_ip
-  gateway   = var.docker_gateway
+  ipaddress   = var.docker_ip
+  gateway     = var.docker_gateway
   dns_servers = var.dns_servers
 }

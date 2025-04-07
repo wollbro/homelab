@@ -53,7 +53,7 @@ variable "ssh_key_path" {
 }
 
 variable "dns_servers" {
-  type = list(string)
+  type      = list(string)
   sensitive = true
 }
 

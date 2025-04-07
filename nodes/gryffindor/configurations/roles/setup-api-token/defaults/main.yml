@@ -27,3 +27,4 @@ permissions: |
   VM.Monitor
   VM.PowerMgmt
   User.Modify
+  Mapping.Modify

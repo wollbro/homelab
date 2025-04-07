@@ -1,7 +1,3 @@
-locals {
-  datastore_id = "local-zfs"
-}
-
 resource "proxmox_virtual_environment_vm" "truenas_vm" {
   provider = proxmox.api
 
@@ -9,7 +5,7 @@ resource "proxmox_virtual_environment_vm" "truenas_vm" {
   description = "Managed by Terraform"
   tags        = ["terraform", "truenas"]
 
-  node_name = "gryffindor"
+  node_name = local.default_node
   vm_id     = 1000
 
   keyboard_layout = "sv"
