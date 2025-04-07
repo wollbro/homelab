@@ -1,5 +1,5 @@
 - name: Prepare Proxmox for Terraform
-  hosts: gryffindor
+  hosts: nodes
   remote_user: root
 
   tasks:
