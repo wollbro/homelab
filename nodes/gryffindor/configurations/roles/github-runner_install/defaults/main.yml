@@ -3,4 +3,4 @@ tar_url: https://github.com/actions/runner/releases/download/v2.323.0/actions-ru
 tar_file: actions-runner.tar.gz
 checksum: 0dbc9bf5a58620fc52cb6cc0448abcca964a8d74b5f39773b7afcad9ab691e19
 repo_url: https://github.com/digidaniel-dev/homelab
-repo_token: AAMLDI2PDDFKOOSC5KETX53H6RBDC
+repo_token: 
