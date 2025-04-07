@@ -11,7 +11,7 @@ module "vm_1010_docker" {
   # VM configuration
   name  = "docker"
   vm_id = 1010
-  node  = local.default_node
+  node  = module.main-node.name
   tags  = ["debian", "docker"]
 
   # Credentials

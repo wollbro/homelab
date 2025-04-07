@@ -6,7 +6,7 @@ resource "proxmox_virtual_environment_hardware_mapping_pci" "NIC1" {
     {
       id           = "8086:1533"
       iommu_group  = 34
-      node         = local.default_node
+      node         = module.main-node.name
       path         = "0000:05:00.0"
       subsystem_id = "1849:1533"
     },
