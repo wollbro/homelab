@@ -30,7 +30,7 @@ module "vm_1010_docker" {
   checksum_algorithm = "sha512"
 
   # Networking
-  ipaddress = var.docker_ip
-  gateway   = var.docker_gateway
+  ipaddress   = var.docker_ip
+  gateway     = var.docker_gateway
   dns_servers = var.dns_servers
 }
