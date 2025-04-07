@@ -3,7 +3,7 @@ locals {
 }
 
 resource "proxmox_virtual_environment_vm" "truenas_vm" {
-  provider    = proxmox.api
+  provider = proxmox.api
 
   name        = "truenas"
   description = "Managed by Terraform"
@@ -39,7 +39,7 @@ resource "proxmox_virtual_environment_vm" "truenas_vm" {
   }
 
   cdrom {
-    file_id   = proxmox_virtual_environment_download_file.latest_truenas_iso.id
+    file_id   = module.latest_truenas_iso.id
     interface = "ide2"
   }
 

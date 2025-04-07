@@ -1,0 +1,37 @@
+- name: Set Docker architecture based on system
+  set_fact:
+    docker_arch: "{{ docker_arch_map[ansible_architecture] | default(ansible_architecture) }}"
+    docker_release: "{{ ansible_distribution_release }}"
+
+- name: Install required packages
+  ansible.builtin.apt:
+    name: "{{ docker_required_packages }}"
+    state: present
+    update_cache: true
+
+- name: Create keyring directory
+  file:
+    path: "{{ apt_keyring_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Download Docker GPG key
+  get_url:
+    url: https://download.docker.com/linux/debian/gpg
+    dest: "{{ apt_keyring_path }}/{{ docker_key_file }}"
+    mode: '0644'
+    force: true
+
+- name: Add Docker repository
+  apt_repository: 
+    repo: "deb [arch={{ docker_arch }} signed-by={{ apt_keyring_path }}/{{ docker_key_file }}] {{ docker_repo_base_url }} {{ docker_release }} stable"
+    filename: docker
+    state: present
+
+- name: Install Docker packages
+  ansible.builtin.apt:
+    name: "{{ docker_packages }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: "{{ docker_cache_valid_time }}"
+

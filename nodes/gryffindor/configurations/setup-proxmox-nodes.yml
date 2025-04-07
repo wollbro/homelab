@@ -1,0 +1,5 @@
+- name: Setup Proxmox nodes
+  hosts: all-nodes
+  remote_user: root
+  roles:
+    - setup-api-token

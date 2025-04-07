@@ -1,0 +1,10 @@
+- name: Update vm's
+  hosts: all-vms
+
+  tasks:
+    - name: Update and upgrade apt packages
+      ansible.builtin.apt:
+        update_cache: yes
+        upgrade: yes
+      become: true
+      
