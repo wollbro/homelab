@@ -3,6 +3,32 @@ on:
   pull_request:
 
 jobs:
+  ansible-validate:
+    name: Ansible Validate
+    runs-on: self-hosted
+    environment: homelab
+    defaults:
+      run:
+        working-directory: ./nodes/gryffindor/infrastructure
+    permissions:
+      contents: read
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Setup Ansible-lint
+        run: pip install ansible ansible-lint
+
+      - name: Run Ansible-lint
+        run: ansible-lint .
+
   terraform-validate:
     name: Terraform Validate
     runs-on: self-hosted
