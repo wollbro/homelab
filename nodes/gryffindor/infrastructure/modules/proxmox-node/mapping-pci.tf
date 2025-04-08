@@ -2,7 +2,7 @@ resource "proxmox_virtual_environment_hardware_mapping_pci" "mapping_pci" {
   provider = proxmox.api
   for_each = var.pci_devices
 
-  name     = each.key
+  name = each.key
 
   map = [
     {

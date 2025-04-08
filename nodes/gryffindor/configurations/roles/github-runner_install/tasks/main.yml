@@ -18,6 +18,20 @@
   args:
     chdir: "{{ runner_folder }}"
 
+- name: Stop runner service
+  ansible.builtin.shell: |
+    ./svc.sh stop
+  become: true
+  args:
+    chdir: "{{ runner_folder }}"
+
+- name: Uninstall existing runner service
+  ansible.builtin.shell: |
+    ./svc.sh uninstall
+  become: true
+  args:
+    chdir: "{{ runner_folder }}"
+
 - name: Remove existing configured runner
   ansible.builtin.shell: |
     ./config.sh remove \
@@ -36,12 +50,16 @@
   args:
     chdir: "{{ runner_folder }}"
 
-- name: Start runner
+- name: Install runner service
   ansible.builtin.shell: |
-    ./run.sh \
-      --unattended \
-      --url {{ repo_url }} \
-      --token {{ repo_token }} \
-      --name default &
+    ./svc.sh install
+  become: true
+  args:
+    chdir: "{{ runner_folder }}"
+
+- name: start runner service
+  ansible.builtin.shell: |
+    ./svc.sh start
+  become: true
   args:
     chdir: "{{ runner_folder }}"

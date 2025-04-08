@@ -1,5 +1,5 @@
 resource "proxmox_virtual_environment_acme_account" "acme_account" {
-  provider = proxmox.ssh
+  provider  = proxmox.ssh
   name      = "cloudflare"
   contact   = var.email
   directory = "https://acme-v02.api.letsencrypt.org/directory"
