@@ -5,6 +5,7 @@ on:
 jobs:
   terraform:
     runs-on: self-hosted
+    environment: homelab
     defaults:
       run:
         working-directory: ./nodes/gryffindor/infrastructure
@@ -16,20 +17,26 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
 
-      - name: Set up S3 credentials
-        run: |
-          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
-          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
-          echo "S3_ENDPOINT=${{ secrets.S3_ENDPOINT }}" >> $GITHUB_ENV
-
       - name: setup terraform
         uses: hashicorp/setup-terraform@v3
 
       - name: terraform init
-        run: terraform init
+        run: |
+          terraform init \
+            -backend-config="bucket=homelab" \
+            -backend-config="key=terraform/terraform.tfstate" \
+            -backend-config="region=dummy" \
+            -backend-config="access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" \
+            -backend-config="secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
+            -backend-config="endpoints={s3=\"${{ secrets.S3_ENDPOINT }}\"}" \
+            -backend-config="skip_requesting_account_id=true" \
+            -backend-config="skip_credentials_validation=true" \
+            -backend-config="skip_metadata_api_check=true" \
+            -backend-config="skip_region_validation=true" \
+            -backend-config="use_path_style=true"
 
       - name: terraform check format
-        run: terraform fmt -check
+        run: terraform fmt -check -diff -recursive
 
       - name: terraform validate
         run: terraform validate
