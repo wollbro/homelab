@@ -1,91 +1,91 @@
 # VM specific variables
 
 variable "name" {
-  type = string
+  type        = string
   description = "Defines the name of the VM"
 }
 
 variable "description" {
-  type = string
-  default = "Managed by Terraform"
+  type        = string
+  default     = "Managed by Terraform"
   description = "Sets description for the VM"
 }
 
 variable "tags" {
-  type = list(string)
+  type        = list(string)
   description = "Adds tags to the VM to keep things organized"
-  default = [ ]
+  default     = []
 }
 
 variable "node" {
-  type = string
+  type        = string
   description = "Defines what Proxmox node the VM should be added to"
 }
 
 variable "vm_id" {
-  type = number
+  type        = number
   description = "Defines an ID to the VM"
 }
 
 variable "datastore_id" {
-  type = string
-  default = "local-zfs"
+  type        = string
+  default     = "local-zfs"
   description = "Defines what datastore the data should be store at"
 }
 
 # Resource variables
 
 variable "cpu_cores" {
-  type = number
-  default = 2
+  type        = number
+  default     = 2
   description = "Specifies the number of cores that VM should be running"
 }
 
 variable "memory" {
-  type = number
-  default = 2048
+  type        = number
+  default     = 2048
   description = "Specifies the amount of RAM the VM should be running"
 }
 
 variable "disk_size" {
-  type = number
-  default = 20
+  type        = number
+  default     = 20
   description = "Specifies what size the main disk of the VM should have"
 }
 
 # Credentials
 
 variable "ssh_keys" {
-  type = string
+  type        = string
   description = "Defines the ssh keys that will be used to access VM"
 }
 
 variable "user" {
-  type = string
+  type        = string
   description = "Defines what user should be setup"
 }
 
 # Networking
 
 variable "ipaddress" {
-  type = string
+  type        = string
   description = "Defines what IP should be set to the VM"
-  default = "dhcp"
-  sensitive = true
+  default     = "dhcp"
+  sensitive   = true
 }
 
 variable "gateway" {
-  type = string
+  type        = string
   description = "Defines what gateway that the VM should be using"
-  default = ""
-  sensitive = true
+  default     = ""
+  sensitive   = true
 }
 
 variable "dns_servers" {
-  type = list(string)
+  type        = list(string)
   description = "Adds a list of DNS servers to the VM"
-  default = [ ]
-  sensitive = true
+  default     = []
+  sensitive   = true
 }
 
 # Distro image variable

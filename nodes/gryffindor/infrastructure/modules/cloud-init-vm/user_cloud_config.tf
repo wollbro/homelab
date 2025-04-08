@@ -1,7 +1,7 @@
 resource "proxmox_virtual_environment_file" "user_cloud_config" {
   content_type = "snippets"
   datastore_id = "local"
-  node_name = "gryffindor"
+  node_name    = "gryffindor"
 
   source_raw {
     data = <<-EOF
