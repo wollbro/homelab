@@ -1,5 +1,5 @@
 module "latest_truenas_iso" {
-  source = "./modules/download-iso"
+  source = "../modules/download-iso"
 
   node               = module.main-node.name
   url                = "https://download.sys.truenas.net/TrueNAS-SCALE-ElectricEel/24.10.2/TrueNAS-SCALE-24.10.2.iso"

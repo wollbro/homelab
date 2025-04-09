@@ -1,22 +1,23 @@
-module "vm_1020_github_runner" {
-  source = "./modules/cloud-init-vm"
+module "vm_1010_docker" {
+  source = "../modules/cloud-init-vm"
   providers = {
     proxmox = proxmox.api
   }
 
   # VM configuration
-  name  = "github-runner"
-  vm_id = 1020
+  name  = "docker"
+  vm_id = 1010
   node  = module.main-node.name
-  tags  = ["debian", "github-runner"]
+  tags  = ["debian", "docker"]
 
   # Credentials
-  user     = var.github_runner_login_user
+  user     = var.docker_login_user
   ssh_keys = data.local_file.ssh_public_key.content
 
   # Resources
-  cpu_cores = 2
-  memory    = 2048
+  cpu_cores = 4
+  memory    = 4096
+  disk_size = 50
 
   # Distro image configuration
   url                = "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2"
@@ -25,7 +26,7 @@ module "vm_1020_github_runner" {
   checksum_algorithm = "sha512"
 
   # Networking
-  ipaddress   = var.github_runner_ip
-  gateway     = var.github_runner_gateway
+  ipaddress   = var.docker_ip
+  gateway     = var.docker_gateway
   dns_servers = var.dns_servers
 }
