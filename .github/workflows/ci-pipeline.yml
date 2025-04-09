@@ -22,13 +22,13 @@ jobs:
         run: source .venv/bin/activate
 
       - name: Setup PIP
-        run: python3 -m pip install --upgrade pip
+        run: .venv/bin/python3 -m pip install --upgrade pip
 
       - name: Setup Ansible-lint
         run: .venv/bin/pip install ansible ansible-lint
 
       - name: Run Ansible-lint
-        run: ansible-lint .
+        run: PYTHONTRACEMALLOC=1 .venv/bin/ansible-lint .
 
   terraform-validate:
     name: Terraform Validate
