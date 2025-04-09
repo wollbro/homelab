@@ -1,5 +1,5 @@
 module "main-node" {
-  source = "./modules/proxmox-node"
+  source = "../modules/proxmox-node"
   providers = {
     proxmox.api = proxmox.api
     proxmox.ssh = proxmox.ssh
