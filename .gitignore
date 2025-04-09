@@ -1,8 +1,5 @@
 .vscode
 
-iso/**/*.iso
-iso/isofiles
-
 **/.terraform
 **/.terraform.lock.hcl
 **/.terraform.tfstate.*

@@ -9,7 +9,7 @@ jobs:
     environment: homelab
     defaults:
       run:
-        working-directory: ./nodes/gryffindor/infrastructure
+        working-directory: ./nodes/configuration
     permissions:
       contents: read
       pull-requests: write
@@ -18,14 +18,14 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-          cache: "pip"
+      - name: Activate Python VE
+        run: source .venv/bin/activate
+
+      - name: Setup PIP
+        run: python3 -m pip install --upgrade pip
 
       - name: Setup Ansible-lint
-        run: pip install ansible ansible-lint
+        run: .venv/bin/pip install ansible ansible-lint
 
       - name: Run Ansible-lint
         run: ansible-lint .
@@ -36,7 +36,7 @@ jobs:
     environment: homelab
     defaults:
       run:
-        working-directory: ./nodes/gryffindor/infrastructure
+        working-directory: ./nodes/infrastructure/gryffindor
     permissions:
       contents: read
       pull-requests: write
