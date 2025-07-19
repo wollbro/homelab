@@ -6,4 +6,5 @@ resource "proxmox_virtual_environment_download_file" "cloud_image" {
   file_name          = var.filename
   checksum           = var.checksum
   checksum_algorithm = var.checksum_algorithm
+  overwrite          = false
 }

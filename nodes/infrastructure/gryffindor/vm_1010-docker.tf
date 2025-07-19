@@ -20,8 +20,8 @@ module "vm_1010_docker" {
   disk_size = 50
 
   # Distro image configuration
-  url                = "https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2"
-  filename           = "debian-12-generic-amd64.img"
+  url                = "https://cloud.debian.org/images/cloud/bookworm/20250316-2053/debian-12-generic-amd64-20250316-2053.qcow2"
+  filename           = "debian-12-generic-amd64-20250316-2053.img"
   checksum           = "afcd77455c6d10a6650e8affbcb4d8eb4e81bd17f10b1d1dd32d2763e07198e168a3ec8f811770d50775a83e84ee592a889a3206adf0960fb63f3d23d1df98af"
   checksum_algorithm = "sha512"
 
