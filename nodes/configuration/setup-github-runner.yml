@@ -1,8 +1,0 @@
-
-- name: Setup github runners
-  hosts: github-runner-vms
-  roles:
-    - install_ci_packages
-    - role: github-runner_install
-      vars:
-        repo_token: "{{ repo_token }}"
