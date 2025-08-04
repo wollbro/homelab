@@ -18,3 +18,11 @@
 	path = network
 	url = git@github.com:digidaniel-dev/homelab.network.git
 	branch = main
+[submodule "observability"]
+	path = observability
+	url = git@github.com:digidaniel-dev/homelab.observability.git
+	branch = main
+[submodule "bootstrap"]
+	path = bootstrap
+	url = git@github.com:digidaniel-dev/homelab.bootstrap.git
+	branch = main
