@@ -1,6 +1,9 @@
-[submodule "config"]
-	path = config
-	url = git@github.com:digidaniel-dev/homelab-config.git
-[submodule "infra"]
-	path = infra
-	url = git@github.com:digidaniel-dev/homelab-infra.git
+[submodule "apps"]
+	path = apps
+	url = git@github.com:digidaniel-dev/homelab.apps.git
+[submodule "platform"]
+	path = platform
+	url = git@github.com:digidaniel-dev/homelab.platform.git
+[submodule "compute"]
+	path = compute
+	url = git@github.com:digidaniel-dev/homelab.compute.git
