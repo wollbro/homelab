@@ -10,3 +10,6 @@
 [submodule "docs"]
 	path = docs
 	url = git@github.com:digidaniel-dev/homelab.docs.git
+[submodule "network"]
+	path = network
+	url = git@github.com:digidaniel-dev/homelab.network.git
