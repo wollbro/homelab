@@ -7,3 +7,6 @@
 [submodule "compute"]
 	path = compute
 	url = git@github.com:digidaniel-dev/homelab.compute.git
+[submodule "docs"]
+	path = docs
+	url = git@github.com:digidaniel-dev/homelab.docs.git
