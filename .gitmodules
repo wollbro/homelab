@@ -1,6 +1,7 @@
 [submodule "apps"]
 	path = apps
 	url = git@github.com:digidaniel-dev/homelab.apps.git
+	branch = main
 [submodule "platform"]
 	path = platform
 	url = git@github.com:digidaniel-dev/homelab.platform.git
