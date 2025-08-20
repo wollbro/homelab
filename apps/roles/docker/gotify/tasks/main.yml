@@ -1,0 +1,13 @@
+---
+- name: Setup Gotify container
+  include_tasks: ../../common/docker-compose.yml
+  vars:
+    service_name: Gotify
+
+- name: Configure Postgres for Gotify
+  include_tasks: ../../common/postgres-config.yml
+  vars:
+    db_name: "{{ gotify_db_name }}"
+    db_user: "{{ gotify_db_user }}"
+    db_password: "{{ gotify_db_pass }}"
+    db_root_password: "{{ gotify_db_root_pass }}"

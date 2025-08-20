@@ -1,0 +1,16 @@
+---
+- name: Setup Postgres container
+  include_tasks: ../../common/docker-compose.yml
+  vars:
+    service_name: Postgres
+
+- name: Mount db backup share
+  include_role:
+    name: docker/common/db_backup_mount
+
+- name: Include PostgreSQL backup role
+  include_role:
+    name: docker/common/postgres_backup
+  vars:
+    postgres_backup_container_name: "{{ postgres_container_name }}"
+    

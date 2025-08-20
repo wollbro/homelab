@@ -1,0 +1,6 @@
+---
+- name: Setup Plex container
+  include_tasks: ../../common/docker-compose.yml
+  vars:
+    service_name: Plex
+

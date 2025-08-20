@@ -1,0 +1,13 @@
+---
+- name: Install required packages
+  package:
+    name: nfs-common
+    state: present
+
+- name: Mount NFS volume for DB backups
+  ansible.posix.mount:
+    src: "{{ nas_ip }}:{{ database_backup_share }}"
+    path: "{{ database_backup_mount_path }}"
+    opts: rw,sync,hard
+    state: mounted
+    fstype: nfs

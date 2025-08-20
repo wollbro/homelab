@@ -1,0 +1,22 @@
+- hosts: local
+  become: true
+  roles:
+    - role: docker/postgres
+      tags:
+        - install
+        - update
+    
+    - role: docker/diun
+      tags:
+        - install
+        - update
+
+    - role: docker/gotify
+      tags:
+        - install
+        - update
+
+    - role: docker/plex
+      tags:
+        - install
+        - update

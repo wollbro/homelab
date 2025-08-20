@@ -1,0 +1,40 @@
+- name: Ensure required Python3 library is installed
+  package:
+    name:
+      - python3-psycopg2
+    state: present
+
+- name: Ensure {{ db_name }} database exists
+  community.postgresql.postgresql_db:
+    name: "{{ db_name }}"
+    state: present
+    login_host: localhost
+    login_password: "{{ db_root_password }}"
+
+- name: Ensure {{ db_user }} user exists
+  community.postgresql.postgresql_user:
+    name: "{{ db_user }}"
+    password: "{{ db_password }}"
+    db: "{{ db_name }}"
+    state: present
+    login_host: localhost
+    login_password: "{{ db_root_password }}"
+
+- name: Ensure {{ db_user }} user has all privileges for the database on {{ db_name }}
+  community.postgresql.postgresql_privs:
+    privs: ALL
+    type: database
+    role: "{{ db_user }}"
+    login_db: "{{ db_name }}"
+    login_host: localhost
+    login_password: "{{ db_root_password }}"
+
+- name: Ensure {{ db_user }} user has all privileges for schemas on {{ db_name }}
+  community.postgresql.postgresql_privs:
+    privs: ALL
+    type: schema
+    role: "{{ db_user }}"
+    objs: public
+    login_db: "{{ db_name }}"
+    login_host: localhost
+    login_password: "{{ db_root_password }}"

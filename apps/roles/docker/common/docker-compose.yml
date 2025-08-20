@@ -1,0 +1,20 @@
+---
+- name: Ensure {{ service_name }} directory exists
+  file:
+    path: "{{ docker_compose_dir }}/{{ service_name | lower }}"
+    state: directory
+    recurse: yes
+
+- name: Deploy {{ service_name}} docker-compose
+  template:
+    src: docker-compose.yml.j2
+    dest: "{{ docker_compose_dir }}/{{ service_name | lower }}/docker-compose.yml"
+    mode: '0644'
+
+- name: Mount app data share
+  include_role:
+    name: docker/common/app_data_share_mount
+
+- name: Start {{ service_name }} container
+  ansible.builtin.command: docker compose -f {{ docker_compose_dir }}/{{ service_name | lower }}/docker-compose.yml up -d
+

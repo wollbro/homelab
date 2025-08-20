@@ -1,0 +1,18 @@
+---
+services:
+  plex:
+    container_name: {{ plex_container_name }}
+    image: {{ plex_image }}
+    network_mode: host
+    environment:
+{% for env_var in plex_env %}
+      - {{ env_var }}
+{% endfor %}
+    volumes:
+      - {{ plex_data_path }}:/config
+      - {{ plex_tv_path }}:/tv
+      - {{ plex_movies_path }}:/movies
+      - {{ plex_music_path }}:/music
+    labels:
+      - "diun.enable=true"
+    restart: unless-stopped

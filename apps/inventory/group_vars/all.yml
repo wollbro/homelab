@@ -1,0 +1,10 @@
+docker_compose_dir: "/opt/docker"
+nas_ip: nas.home.wollbro.se
+
+# Database backups
+database_backup_share: /mnt/storage/secure/database_backups
+database_backup_mount_path: /mnt/database_backups
+
+# App data mount
+app_data_share: /mnt/storage/apps
+app_data_mount_path: /mnt/app_data

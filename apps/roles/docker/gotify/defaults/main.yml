@@ -1,0 +1,15 @@
+gotify_container_name: gotify
+gotify_image: gotify/server:2.6
+gotify_data_path: "{{ app_data_mount_path }}/{{ ansible_hostname }}/gotify/data"
+gotify_external_port: 8080
+gotify_internal_port: 80
+gotify_db_name: gotify
+gotify_db_user: gotify
+gotify_db_pass: "Qwerty2593!#"
+gotify_db_root_pass: "Qwerty2593!#"
+gotify_env:
+  - "TZ=Europe/Stockholm"
+  - "GOTIFY_DEFAULTUSER_PASS=admin"
+  - "GOTIFY_DATABASE_DIALECT=postgres"
+  - "GOTIFY_DATABASE_CONNECTION=host=db port=5432 user={{ gotify_db_user }} dbname={{ gotify_db_name }} password={{ gotify_db_pass }} sslmode=disable"
+

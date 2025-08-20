@@ -1,0 +1,18 @@
+---
+services:
+  diun:
+    container_name: {{ diun_container_name }}
+    image: {{ diun_image }}
+    command: serve
+    user: root
+    volumes:
+      - "{{ diun_data_path }}:/data"
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+{% for env_var in diun_env %}
+      - {{ env_var }}
+{% endfor %}
+    labels:
+      - "diun.enable=true"
+    restart: always
+

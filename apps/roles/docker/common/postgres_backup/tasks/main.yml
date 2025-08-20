@@ -1,0 +1,22 @@
+---
+- name: Deploy PostgreSQL Docker backup script
+  template:
+    src: pg_backup.sh.j2
+    dest: "{{ postgres_backup_script_path }}"
+    mode: '0755'
+    owner: root
+    group: root
+
+- name: Ensure cron is installed
+  package:
+    name: cron
+    state: present
+
+- name: Ensure cronjob exists for postgres backup
+  cron:
+    name: "Postgres Docker backup"
+    minute: "{{ postgres_backup_cron_minute }}"
+    hour: "{{ postgres_backup_cron_hour }}"
+    job: "{{ postgres_backup_script_path }} >> {{ postgres_backup_log_path }} 2>&1"
+    user: root
+

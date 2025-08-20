@@ -1,0 +1,7 @@
+- hosts: local
+  become: true
+  roles:
+    - role: docker/postgres
+      tags:
+        - install
+        - update

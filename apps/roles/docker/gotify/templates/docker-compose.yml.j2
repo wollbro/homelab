@@ -1,0 +1,19 @@
+---
+services:
+  gotify:
+    container_name: {{ gotify_container_name }}
+    image: {{ gotify_image }}
+    ports:
+      - {{ gotify_external_port }}:{{ gotify_internal_port }}
+    environment:
+{% for env_var in gotify_env %}
+      - {{ env_var }}
+{% endfor %}
+    volumes:
+      - "{{ gotify_data_path }}:/app/data"
+    restart: always
+
+networks:
+  default:
+    name: db
+    external: true

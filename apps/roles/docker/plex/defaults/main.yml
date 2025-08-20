@@ -1,0 +1,11 @@
+plex_container_name: plex
+plex_image: lscr.io/linuxserver/plex:1.41.9.9961-46083195d-ls274
+plex_data_path: "{{ app_data_mount_path }}/{{ ansible_hostname }}/plex/data"
+plex_movies_path: /mnt/movies
+plex_tv_path: /mnt/tv
+plex_music_path: /mnt/music
+plex_env:
+  - "PUID=1000"
+  - "PGID=1000"
+  - "TZ=Europe/Stockholm"
+  - "VERSION=docker"

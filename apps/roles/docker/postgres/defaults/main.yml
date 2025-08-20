@@ -1,0 +1,3 @@
+postgres_container_name: "postgres"
+postgres_password: "Qwerty2593!#" # This is only for testing
+postgres_image: postgres:17.5-alpine3.22

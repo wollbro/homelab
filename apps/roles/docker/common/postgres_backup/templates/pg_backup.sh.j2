@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+CONTAINER_NAME="{{ postgres_backup_container_name }}"
+BACKUP_DIR="{{ database_backup_mount_path }}/{{ ansible_hostname }}/{{ postgres_backup_database_backup_dir }}"
+DATE=$(date +%Y%m%d-%H%M)
+FILENAME="pgdumpall-${DATE}.sql.gz"
+
+mkdir -p "$BACKUP_DIR"
+docker exec -t "$CONTAINER_NAME" pg_dumpall -U postgres | gzip > "$BACKUP_DIR/$FILENAME"
+
+# Rensa äldre än {{ postgres_backup_retention_days }} dagar
+find "$BACKUP_DIR" -type f -name "*.sql.gz" -mtime +{{ postgres_backup_retention_days }} -delete
+

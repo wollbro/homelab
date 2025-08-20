@@ -1,0 +1,8 @@
+postgres_backup_container_name: postgres
+postgres_backup_script_path: /usr/local/bin/pg_backup.sh
+postgres_backup_database_backup_dir: postgres
+postgres_backup_log_path: /var/log/pg_backup.log
+postgres_backup_retention_days: 30
+postgres_backup_cron_hour: 3
+postgres_backup_cron_minute: 0
+
