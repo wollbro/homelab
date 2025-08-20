@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -euo pipefail
+
+# Configuration
+RETENTION_DAYS=30
+TIMESTAMP=$(date +%Y-%m-%d_%H-%M-%S)
+BACKUP_FILE="{{ backup_dir }}/vault_backup_${TIMESTAMP}.snap"
+LATEST_SYMLINK="{{ backup_dir }}/latest.snap"
+LOG_FILE="/var/log/backup_vault.log"
+APPROLE_TOKEN="{{approle_token.stdout}}"
+VAULT_URL="http://{{vault_ip}}:8200"
+
+# Makes sure backup folder exists
+mkdir -p "{{ backup_dir }}"
+
+# Create backup
+VAULT_TOKEN="$APPROLE_TOKEN" VAULT_ADDR="$VAULT_URL" \
+  vault operator raft snapshot save "$BACKUP_FILE"
+
+# Create symlink for latest backup
+ln -sf "$(basename "$BACKUP_FILE")" "$LATEST_SYMLINK"
+
+# Remove backups older than 30 days
+find "{{ backup_dir }}" -name 'vault_backup_*.snap' -type f -mtime +$RETENTION_DAYS -exec rm {} \;
+
+echo "Backup skapad: $BACKUP_FILE" >> $LOG_FILE

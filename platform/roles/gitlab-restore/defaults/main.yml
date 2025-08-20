@@ -1,0 +1,11 @@
+# Backup
+backup_dir: "/mnt/backup-nfs/gitlab"
+nfs_share: "/mnt/storage/secure/apps/gitlab"
+
+gitlab_backup_dir: "/var/opt/gitlab/backups"
+gitlab_config_dir: "/etc/gitlab"
+gitlab_work_dir: "/var/tmp/gitlab-restore"
+
+rclone_path: "/usr/bin/rclone"
+restore_archive: ""   # Exakt fil att återställa, annars senaste
+

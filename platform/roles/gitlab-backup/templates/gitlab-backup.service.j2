@@ -1,0 +1,20 @@
+[Unit]
+Description=GitLab backup pipeline (Omnibus + rclone)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User={{ systemd_user }}
+Group={{ systemd_group }}
+ExecStart={{ bash_path }} -lc '{{ script_path }}'
+Nice={{ nice_level }}
+IOSchedulingClass=best-effort
+IOSchedulingPriority={{ ionice_level }}
+# Ensure we fail hard if anything goes wrong
+SuccessExitStatus=0
+TimeoutStartSec=2h
+
+# Pass through rclone env if you inject via systemd drop-in or env file
+EnvironmentFile=-/etc/default/gitlab-backup
+

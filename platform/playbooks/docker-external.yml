@@ -1,0 +1,14 @@
+- import_playbook: base-playbook.yml
+
+- hosts: local
+  become: true
+  roles:
+    - role: docker
+      tags: install
+
+    - role: ansible-pull_service
+      tags: install
+      service_name: apps
+      service_description: Run ansible-pull from repo for apps
+      git_repo: git@github.com:digidaniel-dev/homelab.apps.git
+      playbook: "{{ ansible_hostname }}"

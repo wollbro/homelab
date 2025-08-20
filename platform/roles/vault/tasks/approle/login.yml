@@ -1,0 +1,8 @@
+---
+- name: Login with approle
+  shell: vault write -field=token auth/approle/login role_id="{{ approle_id }}" secret_id="{{ approle_secret }}"
+  register: approle_token
+  when:
+    - not init_result.stdout | bool
+    - not vault_backup.stat.exists
+

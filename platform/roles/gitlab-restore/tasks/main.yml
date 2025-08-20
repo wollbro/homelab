@@ -1,0 +1,118 @@
+- name: Ensure work dir exists
+  file:
+    path: "{{ gitlab_work_dir }}"
+    state: directory
+    mode: '0750'
+
+# --- Check if restore needed ---
+- name: Check for existing repositories
+  stat:
+    path: "/etc/gitlab_restored"
+  register: git_data
+
+- name: Check for existing backup tar
+  find:
+    paths: "{{ gitlab_backup_dir }}"
+    patterns: "*.tar"
+  register: existing_backups
+
+- name: Decide if restore required
+  set_fact:
+    restore_required: "{{ (not git_data.stat.exists) or (existing_backups.files | length == 0) }}"
+  when: restore_required is not defined
+
+- name: Skip restore if already initialized
+  meta: end_play
+  when: not restore_required
+  tags: always
+
+# --- Fetch archive ---
+- name: Fetch backup archive (if remote)
+  command: >
+    {{ rclone_path }} copy {{ backup_dir }} {{ gitlab_work_dir }}
+  when: restore_archive == ""
+
+- name: Use specific archive if defined
+  set_fact:
+    archive_path: "{{ gitlab_work_dir }}/{{ restore_archive | basename }}"
+  when: restore_archive != ""
+
+- name: Find latest archive if none given
+  find:
+    paths: "{{ gitlab_work_dir }}"
+    patterns: "gitlab-backup-*.tar.gz"
+    recurse: no
+  register: found_archives
+  when: restore_archive == ""
+
+- name: Set latest archive as fact
+  set_fact:
+    archive_path: "{{ (found_archives.files | sort(attribute='mtime') | last).path }}"
+  when: restore_archive == "" and found_archives.files|length > 0
+
+- name: Fail if no archive found
+  fail:
+    msg: "No restore archive found in {{ gitlab_work_dir }}"
+  when: archive_path is not defined
+
+- name: Fail if no archive found
+  fail:
+    msg: "No restore archive found in {{ gitlab_work_dir }}"
+  when: archive_path is not defined
+
+# --- Restore process ---
+- name: Stop Puma before restore
+  command: gitlab-ctl stop puma
+
+- name: Stop Sidekiq before restore
+  command: gitlab-ctl stop sidekiq
+
+- name: Extract restore archive
+  unarchive:
+    src: "{{ archive_path }}"
+    dest: "{{ gitlab_work_dir }}"
+    remote_src: true
+
+- name: Copy config back
+  copy:
+    src: "{{ gitlab_work_dir }}/etc/"
+    dest: "{{ gitlab_config_dir }}/"
+    owner: root
+    group: root
+    mode: preserve
+    remote_src: true
+
+- name: Find app backup tar
+  find:
+    paths: "{{ gitlab_work_dir }}"
+    patterns: "*.tar"
+  register: app_tar
+
+- name: Rename backup tar to GitLab expected name
+  command: >
+    mv "{{ gitlab_work_dir }}/{{ app_tar.files[0].path | basename }}" 
+       "{{ gitlab_backup_dir }}/{{ app_tar.files[0].path | basename | regex_replace('\.tar$', '_gitlab_backup.tar') }}"
+
+- name: Restore GitLab backup
+  command: >
+    gitlab-backup restore BACKUP={{ app_tar.files[0].path | basename | regex_replace('\.tar$', '') }} force=yes
+  args:
+    chdir: "{{ gitlab_backup_dir }}"
+
+- name: Reconfigure of GitLab
+  command: gitlab-ctl reconfigure
+
+- name: Start GitLab
+  command: gitlab-ctl start
+
+- name: Run GitLab check
+  command: gitlab-rake gitlab:check SANITIZE=true
+
+- name: Verify that database values can be decrypted
+  command: gitlab-rake gitlab:doctor:secrets
+
+- name: Mark restore as done
+  file:
+    path: /etc/gitlab_restored
+    state: touch
+

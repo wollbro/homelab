@@ -1,0 +1,8 @@
+---
+- name: Deploy backup script
+  template:
+    src: gitlab-backup.sh.j2
+    dest: "{{ script_path }}"
+    mode: "0750"
+    owner: "{{ systemd_user }}"
+    group: "{{ systemd_group }}"

@@ -1,0 +1,13 @@
+---
+- name: Check of sealed
+  shell: vault status --format=json | jq .sealed
+  register: sealed_result
+
+- name: Unseal Vault using unseal keys
+  shell: |
+    head -n 3 {{ backup_dir }}/{{ unseal_keys_file }} | while read key; do
+      vault operator unseal "$key"
+    done
+  when: sealed_result.stdout | bool
+  changed_when: false
+

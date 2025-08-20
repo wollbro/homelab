@@ -1,0 +1,37 @@
+---
+- name: Check if backup exists
+  stat:
+    path: "{{ backup_dir }}/latest.snap"
+  register: vault_backup
+
+- name: Configure Vault AppRole for backup
+  block:
+    - name: List enabled authentication modes
+      shell: vault auth list --format=json | jq 'has("approle/")'
+      register: auth_list
+      changed_when: false
+
+    - name: Enable approle if not already enabled
+      shell: vault auth enable approle
+      register: approle_enabled
+      when:
+        - not (auth_list.stdout | from_json)
+
+    - name: Check if backup role exists
+      shell: vault read -format=json auth/approle/role/backup
+      register: approle_role
+      failed_when: false
+      changed_when: false
+
+    - name: Create backup role if it does not exist
+      shell: |
+        vault write auth/approle/role/backup \
+          token_type=batch \
+          token_ttl=20m \
+          token_max_ttl=30m
+      when:
+        - approle_role.rc != 0
+  when:
+    - not init_result.stdout | bool
+    - not vault_backup.stat.exists
+

@@ -1,0 +1,19 @@
+---
+- name: Ensure required packages exists
+  apt:
+    name: nfs-common
+    state: present
+
+- name: Ensure NFS mount point exists
+  file:
+    path: "{{ backup_dir }}"
+    state: directory
+
+- name: Mount NFS share for Vault backups
+  mount:
+    path: "{{ backup_dir }}"
+    src: "{{ nas_ip }}:{{ nfs_share }}"
+    fstype: nfs
+    opts: rw
+    state: mounted
+

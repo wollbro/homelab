@@ -1,0 +1,8 @@
+[local]
+localhost ansible_connection=local
+
+[vault]
+vault.home.wollbro.se
+
+[gitlab]
+git.wollbro.se

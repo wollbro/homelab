@@ -1,0 +1,35 @@
+---
+- name: Fetch root token file
+  fetch:
+    src: "{{ backup_dir }}/{{ root_token_file }}"
+    dest: "{{ host_dir }}"
+    flat: yes
+    fail_on_missing: false
+
+- name: Read Vault root token to variable
+  set_fact:
+    vault_root_token: "{{ lookup('file', '{{ host_dir }}{{ root_token_file }}') }}"
+  no_log: true
+
+- name: Remove root token file
+  file:
+    path: "{{ backup_dir }}/{{ root_token_file }}"
+    state: absent
+
+- name: Fetch unseal keys file
+  fetch:
+    src: "{{ backup_dir }}/{{ unseal_keys_file }}"
+    dest: "{{ host_dir }}"
+    flat: yes
+    fail_on_missing: false
+
+- name: Remove unseal keys file
+  file:
+    path: "{{ backup_dir }}/{{ unseal_keys_file }}"
+    state: absent
+
+- name: Remove init file
+  file:
+    path: "{{ backup_dir }}/{{ init_file }}"
+    state: absent
+

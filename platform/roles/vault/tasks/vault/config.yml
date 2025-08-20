@@ -1,0 +1,20 @@
+---
+- name: Create config and data directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: vault
+    group: vault
+    mode: '0750'
+  loop:
+    - /etc/vault.d
+    - /opt/vault/data
+
+- name: Deploy Vault configuration file
+  template:
+    src: vault.hcl.j2
+    dest: /etc/vault.d/vault.hcl
+    owner: vault
+    group: vault
+    mode: '0640'
+

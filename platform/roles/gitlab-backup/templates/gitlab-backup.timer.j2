@@ -1,0 +1,12 @@
+[Unit]
+Description=Schedule GitLab backup pipeline
+
+[Timer]
+OnCalendar={{ systemd_timer_calendar }}
+Persistent=true
+AccuracySec=1m
+RandomizedDelaySec=2m
+
+[Install]
+WantedBy=timers.target
+

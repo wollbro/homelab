@@ -1,0 +1,59 @@
+#!{{ bash_path }}
+set -euo pipefail
+
+umask {{ tmp_umask }}
+
+BACKUP_DIR="{{ gitlab_backup_dir }}"
+CONFIG_DIR="{{ gitlab_config_dir }}"
+WORK_DIR="{{ gitlab_work_dir }}"
+SCRIPT_TS="$(date +%Y%m%d-%H%M%S)"
+ARCHIVE_NAME="gitlab-backup-${SCRIPT_TS}.tar.gz"
+ARCHIVE_PATH="$WORK_DIR/$ARCHIVE_NAME"
+
+IONICE="ionice -c {{ ionice_class }} -n {{ ionice_level }}"
+NICE="nice -n {{ nice_level }}"
+
+RCLONE="{{ rclone_path }}"
+REMOTE="{{ backup_dir }}"
+
+mkdir -p "$WORK_DIR"
+
+# Run GitLab built-in backup (creates a .tar in BACKUP_DIR)
+echo "[gitlab] Creating application backup"
+$IONICE $NICE {{ gitlab_backup_cmd }}
+
+# Locate latest GitLab backup tar
+LATEST_APP="$(ls -t "$BACKUP_DIR"/*.tar | head -n1)"
+[ -f "$LATEST_APP" ] || { echo "No GitLab backup tar found in $BACKUP_DIR"; exit 1; }
+
+# Stage config files
+cp -r "$CONFIG_DIR/gitlab.rb" "$WORK_DIR/etc/" || true
+cp -r "$CONFIG_DIR/gitlab-secrets.json" "$WORK_DIR/etc/" || true
+cp -r "$CONFIG_DIR/ssl" "$WORK_DIR/etc/" || true
+cp -r "$CONFIG_DIR/trusted-certs" "$WORK_DIR/etc/" || true
+
+# Pack app tar + configs into a single archive for shipping
+echo "[pack] Creating consolidated archive: $ARCHIVE_NAME"
+tar -czf "$ARCHIVE_PATH" \
+    -C "$BACKUP_DIR" "$(basename "$LATEST_APP")" \
+    -C "$WORK_DIR" etc
+
+# Upload via rclone
+if [ -x "$RCLONE" ]; then
+  echo "[rclone] Uploading to ${REMOTE}"
+  $IONICE $NICE "$RCLONE" copy "$ARCHIVE_PATH" "${REMOTE}/" \
+    --transfers {{ rclone_transfers }} --checkers {{ rclone_checkers }}
+
+  {% if remote_prune_enabled %}
+  echo "[rclone] Pruning remote older than {{ remote_keep_days }} days"
+  "$RCLONE" delete "${REMOTE}/" --min-age {{ remote_keep_days }}d
+  "$RCLONE" rmdirs "${REMOTE}/"
+  {% endif %}
+fi
+
+# Local retention
+echo "[local] Pruning local archives older than {{ local_keep_days }} days"
+find "$WORK_DIR" -type f -name "gitlab-backup-*.tar.*" -mtime +{{ local_keep_days }} -print -delete || true
+
+echo "[done] Backup pipeline complete: $ARCHIVE_PATH"
+

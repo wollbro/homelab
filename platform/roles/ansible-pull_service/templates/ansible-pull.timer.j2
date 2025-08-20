@@ -1,0 +1,10 @@
+[Unit]
+Description=Run ansible-pull for {{ service_name }} every 15 minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=15min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

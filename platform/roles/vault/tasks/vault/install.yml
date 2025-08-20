@@ -1,0 +1,47 @@
+---
+- name: Ensure required packages are installed
+  apt:
+    name:
+      - gnupg
+      - wget
+      - lsb-release
+    state: present
+    update_cache: yes
+
+- name: Check if Hashicorp Keyring already exists
+  stat:
+    path: /usr/share/keyrings/hashicorp-archive-keyring.gpg
+  register: keyring
+
+- name: Download and install HashiCorp GPG key
+  shell: |
+    wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg 
+  args:
+    executable: /bin/bash
+  become: yes
+  changed_when: true
+  when: not keyring.stat.exists
+
+- name: Get Distro codename
+  command: lsb_release -cs
+  register: distro_codename
+  changed_when: false
+
+- name: Add HashiCorp APT repository
+  copy:
+    dest: /etc/apt/sources.list.d/hashicorp.list
+    content: "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ distro_codename.stdout }} main"
+    mode: '0644'
+
+- name: Install Vault
+  apt:
+    name: vault
+    state: present
+    update_cache: yes
+
+- name: Ensure vault user and group exist
+  user:
+    name: vault
+    system: yes
+    shell: /usr/sbin/nologin
+    create_home: no
