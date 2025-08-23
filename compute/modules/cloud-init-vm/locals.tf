@@ -25,7 +25,7 @@ locals {
 
       [Service]
       Type=oneshot
-      ExecStart=/usr/bin/ansible-pull -U ${var.ansible_repo_url} playbooks/${var.vm_name}.yml --tags="update" -C main -d /root/.ansible-cache/platform-update
+      ExecStart=/usr/bin/ansible-pull -U ${var.ansible_repo_url} platform/playbooks/${var.vm_name}.yml --tags="update" -C main -d /root/.ansible-cache/platform-update
       WorkingDirectory=/root
       StandardOutput=journal
       StandardError=journal
@@ -59,5 +59,5 @@ locals {
 
   write_files_block = join("\n", concat(local.base_write_files, local.ansible_write_files))
 
-  ansible-pull-install = var.vm_use_ansible_pull ? "- ansible-pull -U ${var.ansible_repo_url} playbooks/${var.vm_name}.yml --tags=\"install\" -C main -d /root/.ansible-cache/platform-install > /var/log/ansible-pull.log 2>&1 || touch /tmp/ansible-pull-failed" : ""
+  ansible-pull-install = var.vm_use_ansible_pull ? "- ansible-pull -U ${var.ansible_repo_url} platform/playbooks/${var.vm_name}.yml --tags=\"install\" -C main -d /root/.ansible-cache/platform-install > /var/log/ansible-pull.log 2>&1 || touch /tmp/ansible-pull-failed" : ""
 }

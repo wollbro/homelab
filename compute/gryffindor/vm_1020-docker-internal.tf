@@ -33,6 +33,6 @@ module "vm_1020_docker_internal" {
   vm_dns_servers = var.dns_servers
 
   # Ansible
-  ansible_repo_url    = "git@github.com:digidaniel-dev/homelab.platform.git"
+  ansible_repo_url    = "git@github.com:digidaniel-dev/homelab.git"
   ansible_deploy_key  = var.deploy_key
 }
