@@ -7,3 +7,6 @@
 [submodule "platform"]
 	path = platform
 	url = git@git.wollbro.se:vollbro/homelab.platform.git
+[submodule "docs"]
+	path = docs
+	url = git@git.wollbro.se:vollbro/homelab.docs.git
