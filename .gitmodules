@@ -1,3 +1,6 @@
 [submodule "apps"]
 	path = apps
 	url = git@git.wollbro.se:vollbro/homelab.apps.git
+[submodule "compute"]
+	path = compute
+	url = git@git.wollbro.se:vollbro/homelab.compute.git
