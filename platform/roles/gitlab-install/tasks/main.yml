@@ -1,9 +1,0 @@
----
-- name: Setup Gitlab
-  block:
-    # Prepare 
-    - import_tasks: shares/backup.yml
-
-    # Install
-    - import_tasks: gitlab/install.yml
-    - import_tasks: gitlab/read_data.yml

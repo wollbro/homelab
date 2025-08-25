@@ -1,6 +1,0 @@
-- hosts: gitlab
-  become: true
-  roles:
-    - role: gitlab-install
-    - role: gitlab-backup
-    - role: gitlab-restore

@@ -1,5 +1,0 @@
-- hosts: vault
-  become: true
-  roles:
-    - role: vault
-      tags: install

@@ -1,5 +1,0 @@
----
-gitlab_host: "https://git.wollbro.se"
-initial_root_password_file: "/etc/gitlab/initial_root_password"
-host_dir: "/tmp/"
-

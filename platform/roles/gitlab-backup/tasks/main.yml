@@ -1,6 +1,0 @@
----
-- name: Setup Gitlab backup
-  block:
-    - import_tasks: install.yml
-    - import_tasks: script.yml
-    - import_tasks: systemd.yml

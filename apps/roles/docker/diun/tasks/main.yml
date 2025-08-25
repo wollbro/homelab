@@ -1,5 +1,0 @@
----
-- name: Setup DIUN container
-  include_tasks: ../../common/docker-compose.yml
-  vars:
-    service_name: DIUN
