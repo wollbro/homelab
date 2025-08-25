@@ -13,3 +13,7 @@
 [submodule "network"]
 	path = network
 	url = git@git.wollbro.se:vollbro/homelab.network.git
+[submodule "bootstrap"]
+	path = bootstrap
+	url = git@git.wollbro.se:vollbro/homelab.bootstrap.git
+	branch = main
