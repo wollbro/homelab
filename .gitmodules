@@ -1,18 +1,23 @@
 [submodule "apps"]
 	path = apps
 	url = git@git.wollbro.se:vollbro/homelab.apps.git
+	branch = main
 [submodule "compute"]
 	path = compute
 	url = git@git.wollbro.se:vollbro/homelab.compute.git
+	branch = main
 [submodule "platform"]
 	path = platform
 	url = git@git.wollbro.se:vollbro/homelab.platform.git
+	branch = main
 [submodule "docs"]
 	path = docs
 	url = git@git.wollbro.se:vollbro/homelab.docs.git
+	branch = main
 [submodule "network"]
 	path = network
 	url = git@git.wollbro.se:vollbro/homelab.network.git
+	branch = main
 [submodule "bootstrap"]
 	path = bootstrap
 	url = git@git.wollbro.se:vollbro/homelab.bootstrap.git
