@@ -1,3 +1,8 @@
+> [!WARNING]
+> This repo is mirrored from my personal Gitlab and might not be up-to-date,
+> please visit [git.wollbro.se](https://git.wollbro.se) to see the latest
+> changes I have made on this repo.
+
 # Welcome to my `Homelab`
 
 Welcome friend,
