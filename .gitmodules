@@ -10,3 +10,6 @@
 [submodule "docs"]
 	path = docs
 	url = git@git.wollbro.se:vollbro/homelab.docs.git
+[submodule "network"]
+	path = network
+	url = git@git.wollbro.se:vollbro/homelab.network.git
