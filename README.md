@@ -1,3 +1,8 @@
+> [!WARNING]
+> If you are reading this from my Github then I have moved to my personal
+> Gitlab, please visit [git.wollbro.se](https://git.wollbro.se) for the latest
+> changes.
+
 # Welcome to my `Homelab`
 
 Welcome friend,
